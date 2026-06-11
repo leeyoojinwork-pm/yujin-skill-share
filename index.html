@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>이유진 Skills 공유</title>
+  <meta name="description" content="AI Agent Skills 개념, 추천 원본 링크, 나만의 Skill 제작 흐름을 정리한 공유 페이지">
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --paper: #ffffff;
+      --ink: #111827;
+      --text: #2f3745;
+      --muted: #697386;
+      --line: #dfe5ee;
+      --soft: #eef2f7;
+      --accent: #ff5b1a;
+      --accent-soft: #fff1ea;
+      --blue: #2459c6;
+      --green: #10805f;
+      --shadow: 0 14px 42px rgba(17, 24, 39, .08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Apple SD Gothic Neo", "AppleSDGothicNeo", "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+      letter-spacing: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+
+    .shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 22px;
+    }
+
+    .top {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(223, 229, 238, .86);
+      background: rgba(246, 247, 249, .86);
+      backdrop-filter: blur(14px);
+    }
+
+    .top-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 14px 22px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 168px;
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .mark {
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      color: #fff;
+      background: var(--accent);
+      font-weight: 950;
+    }
+
+    .nav {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+      color: #4b5565;
+      font-size: 14px;
+      font-weight: 850;
+    }
+
+    .nav a {
+      padding: 8px 10px;
+      border-radius: 999px;
+    }
+
+    .nav a:hover { background: var(--soft); color: var(--ink); }
+
+    .hero {
+      padding: 54px 0 34px;
+    }
+
+    .hero-box {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 330px;
+      gap: 28px;
+      align-items: end;
+      padding: clamp(28px, 5vw, 54px);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.96), rgba(255,255,255,.88)),
+        radial-gradient(circle at 84% 0%, rgba(255,91,26,.14), transparent 34%);
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.08;
+      font-weight: 950;
+    }
+
+    .lead {
+      margin: 18px 0 0;
+      max-width: 680px;
+      color: #4d5869;
+      font-size: 17px;
+      line-height: 1.65;
+      font-weight: 740;
+    }
+
+    .hero-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .hero-card h2 {
+      margin: 0;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      font-size: 17px;
+      font-weight: 950;
+    }
+
+    .hero-card ol {
+      margin: 0;
+      padding: 8px 18px 16px 38px;
+      color: #4d5869;
+      font-size: 14px;
+      line-height: 1.55;
+      font-weight: 760;
+    }
+
+    section {
+      padding: 48px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 380px);
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(25px, 3vw, 36px);
+      line-height: 1.18;
+      font-weight: 950;
+    }
+
+    .desc {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.62;
+      font-weight: 720;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .tab {
+      min-height: 38px;
+      padding: 0 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: #4d5869;
+      background: #fff;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 880;
+    }
+
+    .tab.active {
+      border-color: var(--accent);
+      color: #fff;
+      background: var(--accent);
+    }
+
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .card {
+      min-width: 0;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--paper);
+      box-shadow: 0 10px 30px rgba(17,24,39,.045);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .icon {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      color: #fff;
+      background: var(--ink);
+      font-size: 13px;
+      font-weight: 950;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 0 9px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: #5b6575;
+      background: #f8fafc;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.28;
+      font-weight: 950;
+    }
+
+    .card p {
+      margin: 10px 0 0;
+      color: #596475;
+      font-size: 14px;
+      line-height: 1.56;
+      font-weight: 720;
+    }
+
+    .link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      margin-top: 14px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink);
+      background: #f8fafc;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .guide {
+      display: grid;
+      gap: 12px;
+    }
+
+    .guide-row {
+      display: grid;
+      grid-template-columns: 82px minmax(0, 1fr);
+      gap: 16px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    .guide-no {
+      color: var(--accent);
+      font-size: 22px;
+      font-weight: 950;
+    }
+
+    .guide-row h3 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 950;
+    }
+
+    .guide-row p {
+      margin: 8px 0 0;
+      color: #596475;
+      font-size: 14px;
+      line-height: 1.62;
+      font-weight: 720;
+    }
+
+    .prompt {
+      padding: 18px;
+      border: 1px solid #f2c7b5;
+      border-radius: 16px;
+      background: #fff5f0;
+    }
+
+    .prompt b {
+      display: block;
+      margin-bottom: 10px;
+      color: #8f350e;
+      font-size: 14px;
+      font-weight: 950;
+    }
+
+    pre {
+      margin: 0;
+      white-space: pre-wrap;
+      color: #273142;
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.58;
+    }
+
+    .notice {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 20px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .notice p {
+      margin: 0 0 12px;
+      color: #4d5869;
+      font-size: 15px;
+      line-height: 1.62;
+      font-weight: 740;
+    }
+
+    .notice-links {
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+
+    .notice-links a {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 13px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #f8fafc;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    footer {
+      padding: 28px 22px 44px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
+      font-weight: 780;
+    }
+
+    @media (max-width: 900px) {
+      .hero-box,
+      .section-head,
+      .notice {
+        grid-template-columns: 1fr;
+      }
+
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .top-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .shell { padding: 0 16px; }
+      .hero { padding-top: 26px; }
+      .hero-box { padding: 24px; }
+      h1 { font-size: 32px; }
+      .grid { grid-template-columns: 1fr; }
+      .guide-row { grid-template-columns: 1fr; gap: 8px; }
+      section { padding: 38px 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <a class="brand" href="#top"><span class="mark">Y</span><span>이유진 Skills 공유</span></a>
+      <nav class="nav">
+        <a href="#skills">추천 Skills</a>
+        <a href="#sources">원본 링크</a>
+        <a href="#guide">개념 가이드</a>
+        <a href="#build">제작 흐름</a>
+        <a href="#notice">공지용</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="shell">
+      <section class="hero">
+        <div class="hero-box">
+          <div>
+            <p class="eyebrow">AI Agent Skills Guide</p>
+            <h1>AI 에이전트를<br>내 업무 방식에 맞게 세팅하기</h1>
+            <p class="lead">Claude Agent Skills의 핵심 개념, 직군별 원본 링크, 그리고 반복 업무를 나만의 Skill로 바꾸는 과정을 한 페이지로 정리했습니다.</p>
+          </div>
+          <aside class="hero-card">
+            <h2>우선순위</h2>
+            <ol>
+              <li>바로 쓸 수 있는 Skill 예시 보기</li>
+              <li>직군별 원본 링크에서 필요한 것 고르기</li>
+              <li>내 반복 업무를 Skill로 바꾸기</li>
+            </ol>
+          </aside>
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Recommended Skills</p>
+            <h2>바로 보여주기 좋은 Skill 프리뷰</h2>
+          </div>
+          <p class="desc">카드마다 바로가기 링크를 붙였습니다. 발표 중에는 하나만 골라 설명해도 충분합니다.</p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <div class="card-top"><span class="icon">DOC</span><span class="chip">공식</span></div>
+            <h3>Anthropic Skills</h3>
+            <p>PDF, DOCX, XLSX, PPTX 같은 실무 파일을 다루는 공식 Skill 예시 묶음입니다.</p>
+            <a class="link" href="https://github.com/anthropics/skills" target="_blank" rel="noreferrer">원본 열기</a>
+          </article>
+          <article class="card">
+            <div class="card-top"><span class="icon">FIG</span><span class="chip">MCP</span></div>
+            <h3>Figma MCP</h3>
+            <p>디자인 파일, 화면, 프로토타입을 AI와 연결해 작업 맥락을 가져오는 공식 MCP입니다.</p>
+            <a class="link" href="https://developers.figma.com/docs/figma-mcp-server/" target="_blank" rel="noreferrer">원본 열기</a>
+          </article>
+          <article class="card">
+            <div class="card-top"><span class="icon">SEO</span><span class="chip">콘텐츠</span></div>
+            <h3>claude-seo</h3>
+            <p>프리랜서나 마케터가 웹사이트 SEO 점검과 개선안을 만들 때 참고하기 좋은 Skill입니다.</p>
+            <a class="link" href="https://github.com/AgriciDaniel/claude-seo" target="_blank" rel="noreferrer">원본 열기</a>
+          </article>
+          <article class="card">
+            <div class="card-top"><span class="icon">ADS</span><span class="chip">마케팅</span></div>
+            <h3>claude-ads</h3>
+            <p>광고 캠페인 분석, 성과 리포트, 개선안 작성에 활용하기 좋은 Skill 예시입니다.</p>
+            <a class="link" href="https://github.com/AgriciDaniel/claude-ads" target="_blank" rel="noreferrer">원본 열기</a>
+          </article>
+          <article class="card">
+            <div class="card-top"><span class="icon">WEB</span><span class="chip">배포</span></div>
+            <h3>pinme</h3>
+            <p>AI가 만든 웹페이지를 빠르게 공개 링크로 공유할 때 참고하기 좋은 도구입니다.</p>
+            <a class="link" href="https://github.com/glitternetwork/pinme" target="_blank" rel="noreferrer">원본 열기</a>
+          </article>
+          <article class="card">
+            <div class="card-top"><span class="icon">MEM</span><span class="chip">암묵지</span></div>
+            <h3>Consolidate Memory</h3>
+            <p>Claude에 쌓인 개인 맥락과 기억을 정리하는 방향을 이해하기 좋은 공식 Skill 예시입니다.</p>
+            <a class="link" href="https://github.com/anthropics/skills" target="_blank" rel="noreferrer">원본 열기</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="sources">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Source Links</p>
+            <h2>직군별 원본 링크</h2>
+          </div>
+          <p class="desc">탭을 눌러 필요한 직군만 확인하세요. NEW 탭은 날짜를 함께 표시했습니다.</p>
+        </div>
+        <div class="tabs" data-tabs="sources">
+          <button class="tab active" data-tab="freelancer">프리랜서</button>
+          <button class="tab" data-tab="jobseeker">취업 준비생</button>
+          <button class="tab" data-tab="public">공공기관</button>
+          <button class="tab" data-tab="new">NEW</button>
+        </div>
+        <div class="panel active" data-panel="freelancer">
+          <div class="grid">
+            <article class="card"><div class="card-top"><span class="icon">ADS</span><span class="chip">마케팅</span></div><h3>claude-ads</h3><p>광고 성과 분석과 클라이언트 보고서 작성에 활용.</p><a class="link" href="https://github.com/AgriciDaniel/claude-ads" target="_blank" rel="noreferrer">원본 열기</a></article>
+            <article class="card"><div class="card-top"><span class="icon">SEO</span><span class="chip">콘텐츠</span></div><h3>claude-seo</h3><p>SEO 점검과 개선안 작성에 활용.</p><a class="link" href="https://github.com/AgriciDaniel/claude-seo" target="_blank" rel="noreferrer">원본 열기</a></article>
+            <article class="card"><div class="card-top"><span class="icon">BLOG</span><span class="chip">글쓰기</span></div><h3>claude-blog</h3><p>블로그 기획, 작성, 최적화 흐름에 활용.</p><a class="link" href="https://github.com/AgriciDaniel/claude-blog" target="_blank" rel="noreferrer">원본 열기</a></article>
+          </div>
+        </div>
+        <div class="panel" data-panel="jobseeker">
+          <div class="grid">
+            <article class="card"><div class="card-top"><span class="icon">DES</span><span class="chip">2026-04-17</span></div><h3>Claude Design</h3><p>포트폴리오, 원페이저, 발표 시안을 빠르게 만들 때 참고.</p><a class="link" href="https://www.anthropic.com/news/claude-design-anthropic-labs" target="_blank" rel="noreferrer">원본 열기</a></article>
+            <article class="card"><div class="card-top"><span class="icon">MAKE</span><span class="chip">2026-02-17</span></div><h3>Figma Make</h3><p>UX 과제나 프로토타입을 자연어로 빠르게 만드는 기능.</p><a class="link" href="https://www.figma.com/make/" target="_blank" rel="noreferrer">원본 열기</a></article>
+            <article class="card"><div class="card-top"><span class="icon">DOC</span><span class="chip">공식</span></div><h3>Anthropic Skills</h3><p>이력서, 자기소개서, 포트폴리오 파일 작업에 활용.</p><a class="link" href="https://github.com/anthropics/skills" target="_blank" rel="noreferrer">원본 열기</a></article>
+          </div>
+        </div>
+        <div class="panel" data-panel="public">
+          <div class="grid">
+            <article class="card"><div class="card-top"><span class="icon">DRV</span><span class="chip">MCP</span></div><h3>Google Drive MCP</h3><p>드라이브 문서 검색, 요약, 비교에 참고.</p><a class="link" href="https://www.npmjs.com/package/@modelcontextprotocol/server-gdrive" target="_blank" rel="noreferrer">원본 열기</a></article>
+            <article class="card"><div class="card-top"><span class="icon">NOT</span><span class="chip">MCP</span></div><h3>Notion MCP</h3><p>회의록, 위키, DB 기반 업무 자료화에 참고.</p><a class="link" href="https://github.com/makenotion/notion-mcp-server" target="_blank" rel="noreferrer">원본 열기</a></article>
+            <article class="card"><div class="card-top"><span class="icon">GIT</span><span class="chip">MCP</span></div><h3>GitHub MCP</h3><p>기술 문서, 이슈, 저장소 협업이 필요한 팀에 적합.</p><a class="link" href="https://github.com/github/github-mcp-server" target="_blank" rel="noreferrer">원본 열기</a></article>
+          </div>
+        </div>
+        <div class="panel" data-panel="new">
+          <div class="grid">
+            <article class="card"><div class="card-top"><span class="icon">DES</span><span class="chip">2026-04-17</span></div><h3>Claude Design</h3><p>Anthropic Labs의 비주얼 제작 도구.</p><a class="link" href="https://www.anthropic.com/news/claude-design-anthropic-labs" target="_blank" rel="noreferrer">원본 열기</a></article>
+            <article class="card"><div class="card-top"><span class="icon">FIG</span><span class="chip">2026-03-05</span></div><h3>Figma MCP Remote</h3><p>Figma 파일을 AI 에이전트와 연결하는 공식 MCP.</p><a class="link" href="https://developers.figma.com/docs/figma-mcp-server/" target="_blank" rel="noreferrer">원본 열기</a></article>
+            <article class="card"><div class="card-top"><span class="icon">SLD</span><span class="chip">2026-02-17</span></div><h3>Figma Slides</h3><p>Figma 기반 발표 덱 제작과 공유 도구.</p><a class="link" href="https://www.figma.com/slides/" target="_blank" rel="noreferrer">원본 열기</a></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="guide">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Concept Guide</p>
+            <h2>개념은 비유로 잡으면 됩니다</h2>
+          </div>
+          <p class="desc">Skill은 일하는 방식, MCP는 외부 도구로 들어가는 연결 통로, Command는 반복 요청을 줄이는 단축키입니다.</p>
+        </div>
+        <div class="guide">
+          <div class="guide-row"><span class="guide-no">01</span><div><h3>Skills</h3><p>필요할 때만 꺼내 쓰는 전문 과외 선생입니다. 엑셀, PDF, 회의록, 제안서처럼 특정 업무가 들어오면 해당 절차와 기준을 불러옵니다.</p></div></div>
+          <div class="guide-row"><span class="guide-no">02</span><div><h3>MCP Servers</h3><p>Notion, Figma, GitHub, Google Drive 같은 외부 도구로 들어가는 열쇠입니다. 연결 없이는 AI가 바깥 자료를 직접 볼 수 없습니다.</p></div></div>
+          <div class="guide-row"><span class="guide-no">03</span><div><h3>Slash Commands</h3><p>자주 쓰는 긴 요청을 한 줄로 줄인 단축키입니다. 매번 같은 설명을 반복하지 않도록 도와줍니다.</p></div></div>
+        </div>
+      </section>
+
+      <section id="build">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Build Your Skill</p>
+            <h2>나만의 Skill 제작 흐름</h2>
+          </div>
+          <p class="desc">처음부터 Skill을 만들지 말고, AI와 일을 한 번 끝까지 해본 뒤 그 과정을 절차화하는 방식이 가장 자연스럽습니다.</p>
+        </div>
+        <div class="grid">
+          <article class="card"><div class="card-top"><span class="icon">1</span><span class="chip">반복성</span></div><h3>반복 업무 고르기</h3><p>3번 이상 반복했고 입력자료와 결과물 형태가 분명한 일을 고릅니다.</p></article>
+          <article class="card"><div class="card-top"><span class="icon">2</span><span class="chip">실행</span></div><h3>AI와 끝까지 해보기</h3><p>회의록 정리, 리서치 요약, 제안서 초안처럼 실제 업무 하나를 처리합니다.</p></article>
+          <article class="card"><div class="card-top"><span class="icon">3</span><span class="chip">형식화</span></div><h3>기준을 Skill로 바꾸기</h3><p>작업 순서, 판단 기준, 출력 형식, 실패 사례를 정리합니다.</p></article>
+        </div>
+        <div class="prompt" style="margin-top:12px">
+          <b>AI에게 이렇게 말해보기</b>
+          <pre>방금 우리가 한 작업을 그대로 Skill로 만들어줘.
+다음에 비슷한 요청이 오면 같은 절차로 처리할 수 있도록,
+작업 순서, 판단 기준, 출력 형식, 주의사항을 정리해줘.</pre>
+        </div>
+      </section>
+
+      <section id="notice">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Slack Copy</p>
+            <h2>공지에 붙일 문구</h2>
+          </div>
+          <p class="desc">링크와 함께 Slack에 그대로 올릴 수 있는 짧은 버전입니다.</p>
+        </div>
+        <div class="notice">
+          <div>
+            <p>멘토 꿀팁으로 AI Agent Skills 활용 자료 공유드립니다.</p>
+            <p>AI를 단순 대화형 도구로 쓰는 것에서 나아가, 자주 하는 업무를 Skill, MCP, Command처럼 세팅해서 쓰는 방식과 나만의 Skill을 만드는 사고 과정을 정리했습니다.</p>
+            <p>처음 보시는 분들은 추천 Skill 카드와 직군별 원본 링크부터 보시면 좋습니다.</p>
+          </div>
+          <div class="notice-links">
+            <a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview" target="_blank" rel="noreferrer">Agent Skills Docs <span>열기</span></a>
+            <a href="https://github.com/anthropics/skills" target="_blank" rel="noreferrer">Anthropic Skills <span>열기</span></a>
+            <a href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills" target="_blank" rel="noreferrer">Engineering Post <span>열기</span></a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>이유진 Skills 공유</footer>
+
+  <script>
+    document.querySelectorAll("[data-tabs]").forEach((group) => {
+      const tabs = group.querySelectorAll("[data-tab]");
+      const panels = group.parentElement.querySelectorAll("[data-panel]");
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          tabs.forEach((item) => item.classList.remove("active"));
+          panels.forEach((panel) => panel.classList.remove("active"));
+          tab.classList.add("active");
+          group.parentElement.querySelector(`[data-panel="${tab.dataset.tab}"]`).classList.add("active");
+        });
+      });
+    });
+  </script>
+</body>
+</html>
